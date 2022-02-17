@@ -24,18 +24,20 @@
     #error "Please select a prescaler of 0, 1, 8, 64, 256 or 1024"
 #endif
 
+/* See device pin - port mapping */
+#define TOGGLE_PIN			PB5
+#define CONFIG_PORT			('B')
 
-/* The port and pin to be toggled, see datasheet */
-#define TOGGLE_PORT				PORTB
-#define TOGGLE_PIN              PB5
-
-#if (TOGGLE_PORT == PORTA)
-	#define PORT_DDR  DDRA
-#elif (TOGGLE_PORT == PORTB)
-	#define PORT_DDR  DDRB
-#elif (TOGGLE_PORT == PORTC)
-	#define PORT_DDR  DDRC
+/* Auto config depending on prior macro - do not touch */
+#if ('B' == CONFIG_PORT) 
+	#define TOGGLE_PORT		PORTB
+	#define TOGGLE_DDR		DDRB
+#elif ('C' == CONFIG_PORT) 
+	#define TOGGLE_PORT		PORTC
+	#define TOGGLE_DDR		DDRC
+#elif ('D' == CONFIG_PORT) 
+	#define TOGGLE_PORT		PORTD
+	#define TOGGLE_DDR		DDRD
 #else
-	#error "Define a valid GPIO port of either PORTA, PORTB, or PORTC"
+	#error "Please define a port A, B, or C"
 #endif
-
