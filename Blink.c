@@ -10,6 +10,7 @@
 #include <avr/interrupt.h>
 
 #include "BlinkConfig.h"
+#include "avr_debug/avr8-stub/avr8-stub.h"
 
 /**
  * @brief	Timer 1 Compare vector A - Toggle desired output pin
@@ -53,8 +54,11 @@ static void Blink_Timer1Setup (void)
  *
  * @return 	Nothing
  */
-uint8_t main (void) 
+int main (void) 
 {
+	/* Initialise gdb stub */
+	debug_init();
+
 	Blink_Timer1Setup();
 	
 	/* Enter empty superloop */
