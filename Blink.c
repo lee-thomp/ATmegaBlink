@@ -41,11 +41,19 @@ static void Blink_Timer1Setup (void)
 	TIMSK1	|= (1 << OCIE1A);
 	OCR1A 	= TIMER_COMPARE_PERIOD;
 
-	/* Configure output pin port to allow GPIO output */
-	TOGGLE_DDR	|= (1 << TOGGLE_PIN);
-
 	/* Finish setup and resume interrupts */
 	sei();
+}
+
+/**
+ * @brief	Perform setup of output pins
+ *
+ * @return	Nothing
+ */
+static void Blink_OutputPinSetup (void)
+{
+	/* Configure output pin port to allow GPIO output */
+	TOGGLE_DDR	|= (1 << TOGGLE_PIN);
 }
 
 /**
@@ -53,9 +61,10 @@ static void Blink_Timer1Setup (void)
  *
  * @return 	Nothing
  */
-uint8_t main (void) 
+int main (void) 
 {
 	Blink_Timer1Setup();
+	Blink_OutputPinSetup();
 	
 	/* Enter empty superloop */
 	while(1) 

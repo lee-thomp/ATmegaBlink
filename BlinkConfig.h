@@ -3,9 +3,9 @@
 
 
 /* The number of clock ticks before the output pin is flipped
- * Calculate as 16MHz/(CLOCK_PRESCALE * FREQUENCY) - 1
+ * Calculate as 16MHz/(2 * CLOCK_PRESCALE * FREQUENCY) - 1
  * Prescaler macro can contain values of 0, 1, 8 ,64 ,256 or 1024 */
-#define TIMER_COMPARE_PERIOD        (62499u)
+#define TIMER_COMPARE_PERIOD        (31249u)
 #define CLOCK_PRESCALE              (256u)
 
 #if (CLOCK_PRESCALE == 1024u)
